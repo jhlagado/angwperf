@@ -59,7 +59,7 @@ these things are only apparent after trying both ways.
 Below is an example of a wperf report from a real app. It is simply a JSON object. The field "digest" gives an 
 estimate of the length of time in seconds that a digest cycle takes when there has been no change. The fewer watches 
 you have the shorter this figure should be. The field "total" is simply the number of unique watch expressions and the 
-field "exps" is a list of strings of the format "<expression>:<number>", the watched expression is on the left 
+field "exps" is an array of strings of the format "<expression>:<number>", the watched expression is on the left 
 of the colon and the number of times it occurs is on the right, the array has been sorted with the most repeated watches
 first.
 
