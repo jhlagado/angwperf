@@ -61,7 +61,9 @@ estimate of the length of time in seconds that a digest cycle takes when there h
 you have the shorter this figure should be. The field "total" is simply the number of unique watch expressions and the 
 field "exps" is an array of strings of the format "<expression>:<number>", the watched expression is on the left 
 of the colon and the number of times it occurs is on the right, the array has been sorted with the most repeated watches
-first.
+first. 
+
+When a watch uses a function instead of an AngularJS expression, that function is simply shown as a string.
 
 ```js
 {
@@ -80,7 +82,6 @@ first.
         "icon:3", "initials:3",
         "key:3",
         "function elementWidth() {\r\n            return element.width()\r\n        }:3",
-        "function () {\r\n                return cached.changes + basechanges;\r\n            }:3",
         "isimpersonating():3",
         "canCreateBadge:2",
         "$mdTabsCtrl.shouldPaginate:2",
@@ -100,7 +101,6 @@ first.
         "getTitle(personAvatar):1",
         "$mdTabsCtrl.selectedIndex:1",
         "{ 'md-center-tabs': $mdTabsCtrl.shouldCenterTabs }:1",
-        "{ 'md-paginated': $mdTabsCtrl.shouldPaginate, 'md-center-tabs': $mdTabsCtrl.shouldCenterTabs }:1",
         "hasElevioHelp():1",
         "props.route.sidenav == false:1",
         "isLoading() || isSaving():1",
