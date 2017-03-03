@@ -56,7 +56,7 @@ in them that are being watched. ng-if is a heavier operation because it adds and
 however in some cases it might be more efficient because it also removes watches from invisible elements. Sometimes
 these things are only apparent after trying both ways.
 
-Below is an example of a wpref report from a real app. It is simply a JSON object. The field "digest" gives an 
+Below is an example of a wperf report from a real app. It is simply a JSON object. The field "digest" gives an 
 estimate of the length of time in seconds that a digest cycle takes when there has been no change. The fewer watches 
 you have the shorter this figure should be. The field "total" is simply the number of unique watch expressions and the 
 field "exps" is a list of strings of the format "<expression>:<number>", the watched expression is on the left 
