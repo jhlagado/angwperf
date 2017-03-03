@@ -45,6 +45,79 @@ To get a report:
 wperf.report()
 ```
 
-This will produce a report of a watch expressions and functions. 
+This will produce a report of a watch expressions and functions and the number of times this expression appears in 
+the view. The best performance gains can be acheived by reducing the number of heavily repeated watches.
+For apps that use a lot of ng-repeats, for example, this can often mean multiple watches per repeat item(!).
+Replace as many of these as possibile with one-time bindings or find other ways of eliminating the repeated watches. 
 
-For apps that use a lot of ng-repeats, this can often mean multiple watches per repeat item(!).
+It's also worth considering the performance difference between using ng-show and ng-hide. ng-show works by 
+using CSS to change the element visibility. This is fast but it only masks elements which might still have bindings
+in them that are being watched. ng-if is a heavier operation because it adds and removes elements from the DOM 
+however in some cases it might be more efficient because it also removes watches from invisible elements. Sometimes
+these things are only apparent after trying both ways.
+
+Below is an example of a wpref report from a real app. It is simply a JSON object. The field "digest" gives an 
+estimate of the length of time in seconds that a digest cycle takes when there has been no change. The fewer watches 
+you have the shorter this figure should be. The field "total" is simply the number of unique watch expressions and the 
+field "exps" is a list of strings of the format "<expression>:<number>", the watched expression is on the left 
+of the colon and the number of times it occurs is on the right, the array has been sorted with the most repeated watches
+first.
+
+```js
+{
+    "digest": 1.2412999999997556
+    "total": 62,
+    "exps": [
+        "{'md-button-selected': props.route.id == section.id}:50",
+        "badgedata.loaded:10",
+        "measurelist.length:10",
+        "null:5",
+        "!badgedata.loaded:5",
+        "!measurelist.length:5",
+        "item.document.name:4",
+        "tab.scope.disabled:4",
+        "undefined:4", "style:3",
+        "icon:3", "initials:3",
+        "key:3",
+        "function elementWidth() {\r\n            return element.width()\r\n        }:3",
+        "function () {\r\n                return cached.changes + basechanges;\r\n            }:3",
+        "isimpersonating():3",
+        "canCreateBadge:2",
+        "$mdTabsCtrl.shouldPaginate:2",
+        "$mdTabsCtrl.hasContent && $mdTabsCtrl.selectedIndex >= 0:2",
+        "getSecNavClass(props):2",
+        "hasBack():2",
+        "notifCount:2",
+        "props.route.sidenav != false:2",
+        "item.document.reason:1",
+        "getBadgeName(item):1",
+        "item.document.status == 'expiring':1",
+        "item.document.status == 'expired':1",
+        "badgedata.loaded && !badgedata.results.length:1",
+        "hasMoreBadges():1",
+        "fontstyle:1", "elevio:1",
+        "message:1", "person:1",
+        "getTitle(personAvatar):1",
+        "$mdTabsCtrl.selectedIndex:1",
+        "{ 'md-center-tabs': $mdTabsCtrl.shouldCenterTabs }:1",
+        "{ 'md-paginated': $mdTabsCtrl.shouldPaginate, 'md-center-tabs': $mdTabsCtrl.shouldCenterTabs }:1",
+        "hasElevioHelp():1",
+        "props.route.sidenav == false:1",
+        "isLoading() || isSaving():1",
+        "isSaving():1",
+        "!primaryNav:1",
+        "{'impersonate': isimpersonating()}:1",
+        "props.route.toolbar !== false:1",
+        "secondaryNav.length > 1:1",
+        "props.route.showpersonavatar && personAvatar:1",
+        "props.route.showappavatar && props.route.appname && appAvatar(props.route.appname):1",
+        "{'bgpanel-on': props.route.bgpanel != false}:1",
+        "{plainui: props.route.sidenav == false && props.route.toolbar == false && props.route.bgpanel == false}:1",
+        "translate(props.route.title) + ' - xapiapps':1",
+        "!props && !isTesServerOffline:1",
+        "!props && isTesServerOffline:1",
+        "props && props.showui:1",
+    ],
+}
+```
+
