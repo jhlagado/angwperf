@@ -28,18 +28,22 @@ Simply link to this file from your AngularJS app index.html file
 e.g.
 
 ```html
-<script src="scripts/fixes/wperf.js"></script>
+<script src="wperf.js"></script>
 ```
 
 This utility is run from the console in the browser debugger. Before it can wok, it first must be initilaised:
 
+```js
 wperf.init();
+```
 
 This puts Angular into debugging mode. 
 
 To get a report:
 
+```js
 wperf.report()
+```
 
 This will produce a report of a watch expressions and functions. 
 
