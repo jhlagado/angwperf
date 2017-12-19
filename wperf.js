@@ -53,6 +53,9 @@
 
         var reportObj = {
             total: exps.length,
+            gtotal: _.reduce(exps, function(acc, item){
+                return acc + item.count;
+            }, 0),
             exps: exps3,
         }
 
